@@ -13,7 +13,7 @@ public class Ventana extends JFrame{
 		this.setLocationRelativeTo(null);
 		this.setMaximumSize(new Dimension(800,800));
 		this.setTitle("hola");
-		this.setBackground(Color.BLUE);
+		this.setBackground(Color.BLUE); 
 		this.setLocation(200,200);
 
 	}
