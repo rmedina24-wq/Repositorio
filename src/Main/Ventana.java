@@ -29,7 +29,7 @@ public class Ventana extends JFrame{
 		//this.setBackground(Color.BLUE); 
 		this.setLocation(200,200);
 		this.setLayout(null);
-		this.users();
+		this.calculadora();
 		Font labelFont = new Font("Arial", Font.BOLD, 16);
 		//panel izq 
 		
@@ -238,5 +238,197 @@ public class Ventana extends JFrame{
 		
 		users.repaint();
 		users.revalidate();
+	}
+	public void calculadora () {
+		JPanel panel = new JPanel();
+		panel.setOpaque(true);
+		panel.setBackground(new Color(64,64,64));
+		panel.setBounds(500, 500, 500, 500);
+		panel.setLayout(null);
+		
+		panel.setLocation(200,25);
+		this.add(panel);
+		
+		
+		JLabel r1 = new JLabel ();
+		r1.setText("198.55");
+		r1.setBounds(50, 30, 400, 25);
+		r1.setOpaque(true);
+		r1.setBackground(Color.WHITE);
+		r1.setForeground(Color.BLACK);	
+		r1.setFont(new Font("Arial",Font.BOLD,15));
+		r1.setHorizontalAlignment(JLabel.CENTER);
+		panel.add(r1);
+		
+		JButton b1 = new JButton();
+		b1.setText("CE");
+		b1.setBounds(80, 80, 60, 55);
+		b1.setOpaque(true);
+		b1.setBackground(Color.GRAY);
+		b1.setForeground(Color.WHITE);	
+		b1.setFont(new Font("Arial",Font.BOLD,10));
+		panel.add(b1);
+		
+		JButton b2 = new JButton();
+		b2.setText("");
+		b2.setBounds(160, 80, 220, 55);
+		b2.setOpaque(true);
+		b2.setBackground(Color.GRAY);
+		b2.setForeground(Color.WHITE);	
+		b2.setFont(new Font("Arial",Font.BOLD,10));
+		panel.add(b2);
+
+		JButton b3 = new JButton();
+		b3.setText("7");
+		b3.setBounds(80, 150, 60, 55);
+		b3.setOpaque(true);
+		b3.setBackground(Color.GRAY);
+		b3.setForeground(Color.WHITE);	
+		b3.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b3);
+		
+		JButton b4 = new JButton();
+		b4.setText("8");
+		b4.setBounds(160, 150, 60, 55);
+		b4.setOpaque(true);
+		b4.setBackground(Color.GRAY);
+		b4.setForeground(Color.WHITE);	
+		b4.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b4);
+		
+		JButton b5 = new JButton();
+		b5.setText("9");
+		b5.setBounds(240, 150, 60, 55);
+		b5.setOpaque(true);
+		b5.setBackground(Color.GRAY);
+		b5.setForeground(Color.WHITE);	
+		b5.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b5);
+		
+		JButton b6 = new JButton();
+		b6.setText("/");
+		b6.setBounds(320, 150, 60, 55);
+		b6.setOpaque(true);
+		b6.setBackground(new Color(252,148,43));
+		b6.setForeground(Color.WHITE);	
+		b6.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b6);
+		
+		
+		JButton b7 = new JButton();
+		b7.setText("4");
+		b7.setBounds(80, 230, 60, 55);
+		b7.setOpaque(true);
+		b7.setBackground(Color.GRAY);
+		b7.setForeground(Color.WHITE);	
+		b7.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b7);
+		
+		JButton b8 = new JButton();
+		b8.setText("5");
+		b8.setBounds(160, 230, 60, 55);
+		b8.setOpaque(true);
+		b8.setBackground(Color.GRAY);
+		b8.setForeground(Color.WHITE);	
+		b8.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b8);
+		
+		JButton b9 = new JButton();
+		b9.setText("6");
+		b9.setBounds(240, 230, 60, 55);
+		b9.setOpaque(true);
+		b9.setBackground(Color.GRAY);
+		b9.setForeground(Color.WHITE);	
+		b9.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b9);
+		
+		JButton b10 = new JButton();
+		b10.setText("X");
+		b10.setBounds(320, 230, 60, 55);
+		b10.setOpaque(true);
+		b10.setBackground(new Color(252,148,43));
+		b10.setForeground(Color.WHITE);	
+		b10.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(b10);
+		
+		JButton c4 = new JButton();
+		c4.setText("1");
+		c4.setBounds(80, 310, 60, 55);
+		c4.setOpaque(true);
+		c4.setBackground(Color.GRAY);
+		c4.setForeground(Color.WHITE);	
+		c4.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(c4);
+		
+		JButton c3 = new JButton();
+		c3.setText("2");
+		c3.setBounds(160, 310, 60, 55);
+		c3.setOpaque(true);
+		c3.setBackground(Color.GRAY);
+		c3.setForeground(Color.WHITE);	
+		c3.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(c3);
+		
+		JButton c2 = new JButton();
+		c2.setText("3");
+		c2.setBounds(240, 310, 60, 55);
+		c2.setOpaque(true);
+		c2.setBackground(Color.GRAY);
+		c2.setForeground(Color.WHITE);	
+		c2.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(c2);
+		
+		JButton c1 = new JButton();
+		c1.setText("-");
+		c1.setBounds(320, 310, 60, 55);
+		c1.setOpaque(true);
+		c1.setBackground(new Color(252,148,43));
+		c1.setForeground(Color.WHITE);	
+		c1.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(c1);
+		
+		//-----------------------------------------
+		JButton p1 = new JButton();
+		p1.setText("0");
+		p1.setBounds(80, 390, 60, 55);
+		p1.setOpaque(true);
+		p1.setBackground(Color.GRAY);
+		p1.setForeground(Color.WHITE);	
+		p1.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(p1);
+		
+		JButton p2 = new JButton();
+		p2.setText(".");
+		p2.setBounds(160, 390, 60, 55);
+		p2.setOpaque(true);
+		p2.setBackground(Color.GRAY);
+		p2.setForeground(Color.WHITE);	
+		p2.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(p2);
+		
+		JButton p5 = new JButton();
+		p5.setText("=");
+		p5.setBounds(240, 390, 60, 55);
+		p5.setOpaque(true);
+		p5.setBackground(new Color(252,148,43));		
+		p5.setForeground(Color.WHITE);	
+		p5.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(p5);
+		
+		JButton p6 = new JButton();
+		p6.setText("+");
+		p6.setBounds(320, 390, 60, 55);
+		p6.setOpaque(true);
+		p6.setBackground(new Color(252,148,43));
+		p6.setForeground(Color.WHITE);	
+		p6.setFont(new Font("Arial",Font.BOLD,17));
+		panel.add(p6);
+		
+		
+		
+		
+		panel.repaint();
+		panel.revalidate();
+		
 	}
 }
