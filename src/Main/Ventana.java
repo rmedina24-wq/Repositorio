@@ -1,8 +1,12 @@
 package Main;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -32,7 +36,7 @@ public class Ventana extends JFrame{
 		this.setLocation(200,200);
 		this.setLayout(null);
 		
-		JMenuBar barra = new JMenuBar();
+		/*JMenuBar barra = new JMenuBar();
 		
 		JMenu archivo = new JMenu("archivo");
 		JMenuItem open = new JMenuItem("CERRAR");
@@ -42,10 +46,10 @@ public class Ventana extends JFrame{
 		archivo.add(open);
 		archivo.add(close);
 		archivo.add(save);
-		archivo.add(newFile);
+		archivo.add(newFile);*/
 
 		
-		barra.add(archivo);
+		/*barra.add(archivo);
 		JMenu submenu = new JMenu("otros");
 		archivo.addSeparator();
 
@@ -53,10 +57,10 @@ public class Ventana extends JFrame{
 		submenu.add(menuItem);
 		menuItem = new JMenuItem ("Another item");
 		submenu.add(menuItem);
-		archivo.add(submenu);
+		archivo.add(menuItem);*/
 		
-		this.setJMenuBar(barra);
-		this.users();
+		//this.setJMenuBar(barra);
+		this.test();
 		this.setVisible(true);
 
 		Font labelFont = new Font("Arial", Font.BOLD, 16);
@@ -65,6 +69,81 @@ public class Ventana extends JFrame{
 		
 		
 		
+	}
+	public void test() {
+		JPanel test_panel = new JPanel();
+		test_panel.setSize(400, 450);
+		test_panel.setLocation(200,10);
+		test_panel.setBackground(Color.white);
+		test_panel.setLayout(new BorderLayout(100,100));
+		this.add(test_panel);
+		
+		
+		
+		
+		JLabel users_title = new JLabel("USUARIOS"); 
+		users_title.setFont(new Font("Arial",Font.BOLD,22));
+		users_title.setBackground(Color.decode("#F27A61"));
+		test_panel.add(users_title,BorderLayout.NORTH);
+		
+		/*
+		 * JLabel users_title2 = new JLabel("USUARIOS"); 
+		users_title2.setFont(new Font("Arial",Font.BOLD,22));
+		users_title2.setBackground(Color.decode("#F27A61"));
+		test_panel.add(users_title2,BorderLayout.LINE_START);
+		
+		JLabel users_title3 = new JLabel("USUARIOS"); 
+		users_title3.setFont(new Font("Arial",Font.BOLD,22));
+		users_title3.setBackground(Color.decode("#F27A61"));
+		test_panel.add(users_title3,BorderLayout.LINE_END);
+		
+		 * 
+		 */
+		
+		
+		
+		
+		
+		JPanel center_panel = new JPanel(); 
+		center_panel.setBackground(Color.yellow);
+		center_panel.setLayout(new GridLayout(4,4));
+		
+		center_panel.add(new JButton("1"));
+		center_panel.add(new JButton("2"));
+		center_panel.add(new JButton("3"));
+		center_panel.add(new JButton("4"));
+		center_panel.add(new JButton("5"));
+		center_panel.add(new JButton("6"));
+		center_panel.add(new JButton("1"));
+		center_panel.add(new JButton("2"));
+		center_panel.add(new JButton("3"));
+		center_panel.add(new JButton("4"));
+		center_panel.add(new JButton("5"));
+		center_panel.add(new JButton("6"));
+		center_panel.add(new JButton("3"));
+		center_panel.add(new JButton("4"));
+		center_panel.add(new JButton("5"));
+		center_panel.add(new JButton("6"));
+		
+		test_panel.add(center_panel,BorderLayout.CENTER);
+		
+		
+		JPanel south_panel = new JPanel();  
+		south_panel.setBackground(Color.red);
+		south_panel.setLayout(new FlowLayout(20,20,0));
+		
+		south_panel.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
+		south_panel.add(new JButton("1"));
+		south_panel.add(new JButton("2"));
+		south_panel.add(new JButton("3"));
+		south_panel.add(new JButton("4"));
+		south_panel.add(new JButton("5"));
+		
+		test_panel.add(south_panel,BorderLayout.SOUTH);
+	
+		
+	
 	}
 
 	public void login() {
