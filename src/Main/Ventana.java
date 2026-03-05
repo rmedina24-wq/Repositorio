@@ -7,7 +7,10 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,49 +26,74 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
 
 public class Ventana extends JFrame {
+	 
+		private double operandoA = 0;
+	    private String operacion = "";
+	    private boolean esperandoB = false; 
+	    private boolean errored = false;
+	    
+	    private JLabel labelExpresion;
+	    private JLabel labelResultado; 
+	    
+	    private static final Color BG_VENTANA = Color.decode("#1e1e2e");
+	    private static final Color BG_PANTALLA = Color.decode("#181825");
+	    private static final Color BG_BTN_NUM = Color.decode("#313244");
+	    private static final Color BG_BTN_OP = Color.decode("#cba6f7"); 
+	    private static final Color BG_BTN_ESP = Color.decode("#f38ba8");
+	    private static final Color BG_BTN_IGUAL = Color.decode("#a6e3a1");
+	    private static final Color COLOR_TEXT = Color.decode("#cdd6f4");
+	    private static final Color COLOR_TEXT_OP = Color.decode("#1e1e2e");
+
+	    // ── Fuentes ───────────────────────────────────────────────────────
+	    private static final Font FONT_PANTALLA = new Font("Segoe UI", Font.BOLD, 36);
+	    private static final Font FONT_EXPR = new Font("Segoe UI", Font.PLAIN, 16);
+	    private static final Font FONT_BTN = new Font("Segoe UI", Font.BOLD, 20);
+	    private static final Font FONT_BTN_SM = new Font("Segoe UI", Font.BOLD, 16);
+
 	public Ventana() {
-		
+		this.setTitle("Calculando el interes");
+
 		this.setSize(1200,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMaximumSize(new Dimension(1200,800));
-		this.setTitle("Mi Ventana");
+        this.setResizable(false);
+
+	//	this.setTitle("Mi Ventana");
 		//this.setBackground(Color.BLUE); 
 		this.setLocation(200,200);
 		this.setLayout(null);
-		
-		/*JMenuBar barra = new JMenuBar();
-		
-		JMenu archivo = new JMenu("archivo");
-		JMenuItem open = new JMenuItem("CERRAR");
-		JMenuItem close = new JMenuItem("ABRIR");
-		JMenuItem save= new JMenuItem("GUARDAR");
-		JMenuItem newFile = new JMenuItem("NUEVO");
-		archivo.add(open);
-		archivo.add(close);
-		archivo.add(save);
-		archivo.add(newFile);*/
+		/*
+		 * this.test();
+        this.setLayout(new BorderLayout(0, 0));
 
-		
-		/*barra.add(archivo);
-		JMenu submenu = new JMenu("otros");
-		archivo.addSeparator();
+        this.construirPantalla();
+        this.construirTeclado();
+        this.getContentPane().setBackground(BG_VENTANA);
 
-		JMenuItem  menuItem = new JMenuItem ("An item in the submenu");
-		submenu.add(menuItem);
-		menuItem = new JMenuItem ("Another item");
-		submenu.add(menuItem);
-		archivo.add(menuItem);*/
+        this.pack();
+		 */
 		
-		//this.setJMenuBar(barra);
-		this.test();
+        this.layat();
 		this.setVisible(true);
+
+
 
 		Font labelFont = new Font("Arial", Font.BOLD, 16);
 		//panel izq 
-		
+		/*
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+
+        
+
+        this.setLocationRelativeTo(null); // centrar DESPUÉS de pack()
+        this.setVisible(true);
+		 */
 		
 		
 		
@@ -145,6 +173,404 @@ public class Ventana extends JFrame {
 		
 	
 	}
+	private void construirPantalla() {
+        JPanel panelPantalla = new JPanel();
+        panelPantalla.setLayout(new BorderLayout());
+        panelPantalla.setBackground(BG_PANTALLA);
+        panelPantalla.setPreferredSize(new Dimension(360, 110));
+        panelPantalla.setBorder(BorderFactory.createEmptyBorder(12, 18, 12, 18));
+
+        // Línea superior: expresión parcial ej: "25 + "
+        labelExpresion = new JLabel(" ");
+        labelExpresion.setFont(FONT_EXPR);
+        labelExpresion.setForeground(Color.decode("#a6adc8"));
+        labelExpresion.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelPantalla.add(labelExpresion, BorderLayout.NORTH);
+
+        // Línea inferior: número actual / resultado
+        labelResultado = new JLabel("0");
+        labelResultado.setFont(FONT_PANTALLA);
+        labelResultado.setForeground(COLOR_TEXT);
+        labelResultado.setHorizontalAlignment(SwingConstants.RIGHT);
+        panelPantalla.add(labelResultado, BorderLayout.CENTER);
+
+        this.add(panelPantalla, BorderLayout.NORTH);
+    }
+	private void construirTeclado() {
+
+        JPanel panelPrincipal = new JPanel(new BorderLayout(4, 4));
+        panelPrincipal.setBackground(BG_VENTANA);
+        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
+        // ── Fila extra superior (C, CE, %, ÷) ─────────────────────────
+        JPanel filaTop = new JPanel(new GridLayout(1, 4, 6, 6));
+        filaTop.setBackground(BG_VENTANA);
+        filaTop.add(crearBoton("C", BG_BTN_ESP, COLOR_TEXT_OP, FONT_BTN_SM, this::accionClear));
+        filaTop.add(crearBoton("CE", BG_BTN_ESP, COLOR_TEXT_OP, FONT_BTN_SM, this::accionCE));
+        filaTop.add(crearBoton("%", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("%")));
+        filaTop.add(crearBoton("÷", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("÷")));
+        panelPrincipal.add(filaTop, BorderLayout.NORTH);
+
+       
+        JPanel gridCenter = new JPanel(new GridLayout(4, 4, 6, 6));
+        gridCenter.setBackground(BG_VENTANA);
+
+       
+        gridCenter.add(crearBoton("7", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("7")));
+        gridCenter.add(crearBoton("8", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("8")));
+        gridCenter.add(crearBoton("9", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("9")));
+        gridCenter.add(crearBoton("×", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("×")));
+
+        
+        gridCenter.add(crearBoton("4", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("4")));
+        gridCenter.add(crearBoton("5", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("5")));
+        gridCenter.add(crearBoton("6", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("6")));
+        gridCenter.add(crearBoton("−", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("−")));
+
+      
+        gridCenter.add(crearBoton("1", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("1")));
+        gridCenter.add(crearBoton("2", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("2")));
+        gridCenter.add(crearBoton("3", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("3")));
+        gridCenter.add(crearBoton("+", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("+")));
+
+        // Fila +/- 0 . =
+        gridCenter.add(crearBoton("+/−", BG_BTN_NUM, COLOR_TEXT, FONT_BTN_SM, this::accionNegarSigno));
+        gridCenter.add(crearBoton("0", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("0")));
+        gridCenter.add(crearBoton(".", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito(".")));
+        gridCenter.add(crearBoton("=", BG_BTN_IGUAL, COLOR_TEXT_OP, FONT_BTN, this::accionIgual));
+
+        panelPrincipal.add(gridCenter, BorderLayout.CENTER);
+
+        JPanel panelSur = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 6));
+        panelSur.setBackground(BG_VENTANA);
+
+        String[] extras = { "x²", "√", "1/x" };
+        for (String lbl : extras) {
+            JButton b = crearBoton(lbl, Color.decode("#45475a"), COLOR_TEXT, FONT_BTN_SM,
+                    e -> accionFuncion(lbl));
+            b.setPreferredSize(new Dimension(90, 38));
+            panelSur.add(b);
+        }
+
+        panelPrincipal.add(panelSur, BorderLayout.SOUTH);
+
+        this.add(panelPrincipal, BorderLayout.CENTER);
+    }
+	
+	
+	private void layat() {
+	
+        this.setSize(320, 380);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+
+        
+        JPanel mainPanel = new JPanel(new BorderLayout(0, 5));
+        mainPanel.setBackground(Color.GRAY); 
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+        this.setContentPane(mainPanel);
+
+        
+        JPanel Panel1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        Panel1.setBackground(Color.GREEN);
+
+        JLabel tittle_Interes = new JLabel("Interés");
+        tittle_Interes.setFont(new Font("Arial", Font.BOLD, 20));
+        tittle_Interes.setForeground(Color.RED); 
+        Panel1.add(tittle_Interes);
+
+        mainPanel.add(Panel1, BorderLayout.NORTH);
+
+
+        JPanel Panel2 = new JPanel(new BorderLayout(0, 8));
+        Panel2.setBackground(Color.GREEN);
+        Panel2.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(Color.BLACK),
+                "Calcular Interés",
+                TitledBorder.LEFT,
+                TitledBorder.TOP,
+                new Font("Arial", Font.PLAIN, 12),
+                Color.BLACK));
+
+        JPanel formPanel = new JPanel(new GridLayout(3, 2, 5, 10));
+        formPanel.setOpaque(false);
+        formPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 5, 15));
+
+        JLabel lblCapital = new JLabel("Capital:", SwingConstants.RIGHT);
+        JTextField txtCapital = new JTextField("1500");
+
+        JLabel lblTiempo = new JLabel("Tiempo:", SwingConstants.RIGHT);
+        JTextField txtTiempo = new JTextField("2");
+
+        JLabel lblTasa = new JLabel("Tasa Interés:", SwingConstants.RIGHT);
+        JTextField txtTasa = new JTextField("0.1");
+
+        formPanel.add(lblCapital);
+        formPanel.add(txtCapital);
+        formPanel.add(lblTiempo);
+        formPanel.add(txtTiempo);
+        formPanel.add(lblTasa);
+        formPanel.add(txtTasa);
+
+        Panel2.add(formPanel, BorderLayout.CENTER);
+
+        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 8));
+        btnPanel.setOpaque(false);
+
+        JButton btnCalcular = new JButton("Calcular");
+        btnCalcular.setBackground(Color.RED);
+        btnCalcular.setForeground(Color.WHITE);
+        btnCalcular.setFont(new Font("Arial", Font.BOLD, 12));
+
+        JButton btnCancelar = new JButton("Cancelar");
+        btnCancelar.setBackground(Color.RED);
+
+        btnCancelar.setForeground(Color.WHITE);
+        btnCancelar.setFont(new Font("Arial", Font.BOLD, 12));
+
+        btnPanel.add(btnCalcular);
+        btnPanel.add(btnCancelar);
+
+        Panel2.add(btnPanel, BorderLayout.SOUTH);
+
+        mainPanel.add(Panel2, BorderLayout.CENTER);
+
+       
+        JPanel PanelRosa = new JPanel(new GridLayout(2, 2, 5, 5));
+        PanelRosa.setBackground(Color.PINK);
+        PanelRosa.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+
+        JLabel lblInteres = new JLabel("Interés:", SwingConstants.LEFT);
+        JTextField txtInteres = new JTextField("315.0000000000002");
+        txtInteres.setEditable(false);
+
+        JLabel lblMonto = new JLabel("Monto:", SwingConstants.LEFT);
+        JTextField txtMonto = new JTextField("1815.000000000002");
+        txtMonto.setEditable(false);
+
+        PanelRosa.add(lblInteres);
+        PanelRosa.add(txtInteres);
+        PanelRosa.add(lblMonto);
+        PanelRosa.add(txtMonto);
+
+        mainPanel.add(PanelRosa, BorderLayout.SOUTH);
+
+        this.setVisible(true);
+    }
+        
+    
+		
+		
+		
+		
+		
+	
+   
+    private JButton crearBoton(String texto, Color bg, Color fg, Font font,
+            ActionListener listener) {
+        JButton btn = new JButton(texto);
+        btn.setFont(font);
+        btn.setBackground(bg);
+        btn.setForeground(fg);
+        btn.setFocusPainted(false);
+        btn.setBorderPainted(false);
+        btn.setOpaque(true);
+        btn.setPreferredSize(new Dimension(80, 58));
+        btn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        
+        Color hoverColor = bg.brighter();
+        btn.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                btn.setBackground(hoverColor);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                btn.setBackground(bg);
+            }
+        });
+
+        btn.addActionListener(listener);
+        return btn;
+    }
+
+    
+
+    private String pantalla() {
+        return labelResultado.getText();
+    }
+
+    private void setPantalla(String val) {
+        labelResultado.setText(val);
+    }
+
+    private void accionDigito(String d) {
+        if (errored) {
+            reset();
+        }
+
+        String actual = pantalla();
+
+        if (esperandoB) {
+            setPantalla(d.equals(".") ? "0." : d);
+            esperandoB = false;
+            return;
+        }
+
+        if (d.equals(".")) {
+            if (actual.contains("."))
+                return; 
+            setPantalla(actual + ".");
+            return;
+        }
+
+        if (actual.equals("0")) {
+            setPantalla(d);
+        } else {
+            if (actual.length() < 15)
+                setPantalla(actual + d); 
+        }
+    }
+
+    private void accionOperacion(String op) {
+        if (errored) {
+            reset();
+            return;
+        }
+
+        if (!operacion.isEmpty() && !esperandoB) {
+            calcular();
+        }
+
+        operandoA = parseD(pantalla());
+        operacion = op;
+        esperandoB = true;
+
+        labelExpresion.setText(formatearNum(operandoA) + " " + op);
+    }
+
+    private void accionIgual(ActionEvent e) {
+        if (operacion.isEmpty() || errored)
+            return;
+        calcular();
+        operacion = "";
+        esperandoB = true;
+    }
+
+    private void calcular() {
+        double b = parseD(pantalla());
+        double resultado = 0;
+
+        labelExpresion.setText(formatearNum(operandoA) + " " + operacion + " " + formatearNum(b) + " =");
+
+        switch (operacion) {
+            case "+" -> resultado = operandoA + b;
+            case "−" -> resultado = operandoA - b;
+            case "×" -> resultado = operandoA * b;
+            case "÷" -> {
+                if (b == 0) {
+                    mostrarError("No se puede dividir entre 0");
+                    return;
+                }
+                resultado = operandoA / b;
+            }
+            case "%" -> resultado = operandoA % b;
+            default -> resultado = b;
+        }
+
+        setPantalla(formatearNum(resultado));
+        operandoA = resultado;
+    }
+
+    private void accionFuncion(String fn) {
+        if (errored) {
+            reset();
+            return;
+        }
+        double val = parseD(pantalla());
+        double res;
+        switch (fn) {
+            case "x²" -> {
+                res = val * val;
+                labelExpresion.setText("sqr(" + formatearNum(val) + ") =");
+            }
+            case "√" -> {
+                if (val < 0) {
+                    mostrarError("√ negativo");
+                    return;
+                }
+                res = Math.sqrt(val);
+                labelExpresion.setText("√(" + formatearNum(val) + ") =");
+            }
+            case "1/x" -> {
+                if (val == 0) {
+                    mostrarError("1/0 indefinido");
+                    return;
+                }
+                res = 1 / val;
+                labelExpresion.setText("1/(" + formatearNum(val) + ") =");
+            }
+            default -> {
+                return;
+            }
+        }
+        setPantalla(formatearNum(res));
+        operandoA = res;
+        operacion = "";
+        esperandoB = true;
+    }
+
+    private void accionNegarSigno(ActionEvent e) {
+        if (errored)
+            return;
+        double val = parseD(pantalla());
+        setPantalla(formatearNum(-val));
+    }
+
+    private void accionCE(ActionEvent e) {
+        errored = false;
+        setPantalla("0");
+        esperandoB = false;
+    }
+
+    private void accionClear(ActionEvent e) {
+        reset();
+    }
+
+    private void reset() {
+        errored = false;
+        operandoA = 0;
+        operacion = "";
+        esperandoB = false;
+        setPantalla("0");
+        labelExpresion.setText(" ");
+    }
+
+    private void mostrarError(String msg) {
+        errored = true;
+        setPantalla("Error");
+        labelExpresion.setText(msg);
+    }
+
+    private double parseD(String s) {
+        try {
+            return Double.parseDouble(s.replace(",", "."));
+        } catch (NumberFormatException ex) {
+            return 0;
+        }
+    }
+
+    private String formatearNum(double val) {
+        if (Double.isNaN(val) || Double.isInfinite(val))
+            return "Error";
+        if (val == Math.floor(val) && !Double.isInfinite(val) && Math.abs(val) < 1e12) {
+            return String.valueOf((long) val);
+        }
+        String s = String.format("%.10f", val).replaceAll("0+$", "").replaceAll("\\.$", "");
+        return s;
+    }
 
 	public void login() {
 		//contenedor del login 
@@ -495,7 +921,6 @@ public class Ventana extends JFrame {
 		c1.setFont(new Font("Arial",Font.BOLD,17));
 		panel.add(c1);
 		
-		//-----------------------------------------
 		JButton p1 = new JButton();
 		p1.setText("0");
 		p1.setBounds(80, 390, 60, 55);
