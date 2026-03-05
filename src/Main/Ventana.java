@@ -24,7 +24,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Ventana extends JFrame{
+public class Ventana extends JFrame {
 	public Ventana() {
 		
 		this.setSize(1200,600);
