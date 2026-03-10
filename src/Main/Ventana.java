@@ -7,11 +7,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -27,6 +30,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 public class Ventana extends JFrame {
@@ -55,7 +59,7 @@ public class Ventana extends JFrame {
 	    private static final Font FONT_BTN_SM = new Font("Segoe UI", Font.BOLD, 16);
 
 	public Ventana() {
-		this.setTitle("Calculando el interes");
+		this.setTitle("JFrame Icon");
 
 		this.setSize(1200,600);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,8 +82,11 @@ public class Ventana extends JFrame {
         this.pack();
 		 */
 		
-        this.layat();
+
+		this.icono();
+		
 		this.setVisible(true);
+		
 
 
 
@@ -87,6 +94,7 @@ public class Ventana extends JFrame {
 		//panel izq 
 		/*
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.setLocationRelativeTo(null);
 
         
@@ -97,6 +105,21 @@ public class Ventana extends JFrame {
 		
 		
 		
+		
+	}
+	public void icono() {
+
+		ImageIcon icono = new ImageIcon(getClass().getResource("/img/imagenes/log.png"));
+
+        setIconImage(icono.getImage());
+
+        JLabel logo = new JLabel(icono);
+        add(logo);
+        
+      
+
+		
+	
 	}
 	public void test() {
 		JPanel test_panel = new JPanel();
@@ -258,7 +281,8 @@ public class Ventana extends JFrame {
     }
 	
 	
-	private void layat() {
+	public void layat() {
+		
 	
         this.setSize(320, 380);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
