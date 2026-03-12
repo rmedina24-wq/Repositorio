@@ -1,17 +1,24 @@
 package Main;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -82,7 +89,8 @@ public class Ventana extends JFrame {
         this.pack();
 		 */
 		
-		this.icono()	;
+		//this.icono()	;
+		this.pintar();
 		this.setVisible(true);
 		
 		//panel izq 
@@ -376,14 +384,6 @@ public class Ventana extends JFrame {
 
         this.setVisible(true);
     }
-        
-    
-		
-		
-		
-		
-		
-	
    
     private JButton crearBoton(String texto, Color bg, Color fg, Font font,
             ActionListener listener) {
@@ -980,6 +980,56 @@ public class Ventana extends JFrame {
 		
 		panel.repaint();
 		panel.revalidate();
+		
+	}
+	public void pintar() {
+		JPanel pane = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D)g;
+               // g2d.drawLine(0, 0, 100, 100);
+                //color , grosor , cuadrado y locacion 
+                g2d.setColor(Color.RED);
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawRect(250, 250, 100, 100);
+                g2d.drawRect(250, 250, 100, 100);
+                g2d.drawRect(250, 250, 100, 100);
+                //para cambiar de color cada figura debemos comentar setcolor antes
+                g2d.setColor(Color.GREEN);
+                g2d.drawOval(400, 100, 50, 50);
+                
+                g2d.setStroke(new BasicStroke(4));
+                //arco 200,100,300
+                //100,
+                g2d.drawArc(300, 100, 100, 100, 0, 180);
+                //pasamos cordenadas , el ultimo num es la cantidad de lados 
+                g2d.drawPolygon(new int[] {200,100,300}, new int[] {100,500,500},3);
+                //cuadrado relleno
+                g2d.setColor(Color.BLUE);
+                g2d.fillRect(500, 200, 100, 100);
+                //ovalo relleno
+                g2d.fillOval(380, 200, 100, 100);
+                //circulo lleno ,300,300,100,100,0,300 pacman
+                g2d.fillArc(300, 300, 100, 100, 90, 90);
+                
+                g2d.fillPolygon(new int[] {400,300,500}, new int[] {200,300,500}, 3);
+                
+                try {
+                	BufferedImage image = ImageIO.read(new File("src\\img\\imagenes"));
+                	g2d.drawImage(image,500,9,null);
+
+                }catch (IOException e) {
+                	e.printStackTrace();
+                }
+                
+                //g2d.drawLine(200, 200, 500, 200);
+                
+            }
+        };
+        pane.setSize(1200,700);
+        pane.setLocation(0, 0);
+        this.add(pane);
 		
 	}
 }
