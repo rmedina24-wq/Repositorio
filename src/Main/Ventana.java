@@ -82,15 +82,9 @@ public class Ventana extends JFrame {
         this.pack();
 		 */
 		
-
-		this.icono();
-		
+		this.icono()	;
 		this.setVisible(true);
 		
-
-
-
-		Font labelFont = new Font("Arial", Font.BOLD, 16);
 		//panel izq 
 		/*
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

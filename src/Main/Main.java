@@ -11,7 +11,7 @@ public class Main {
 
 		Ventana miventana = new Ventana();
         //SwingUtilities.invokeLater(() -> new Ventana());
-		//no funciono 
+		//no funciono
 
 	}
 
