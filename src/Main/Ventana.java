@@ -68,7 +68,9 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		this.setTitle("JFrame Icon");
 
-		this.setSize(1200,600);
+		this.setSize(500,400);
+		//this.setSize(1200,600);
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMaximumSize(new Dimension(1200,800));
@@ -90,7 +92,7 @@ public class Ventana extends JFrame {
 		 */
 		
 		//this.icono()	;
-		this.pintar();
+		this.casa();
 		this.setVisible(true);
 		
 		//panel izq 
@@ -989,6 +991,7 @@ public class Ventana extends JFrame {
                 super.paintComponent(g);
                 Graphics2D g2d = (Graphics2D)g;
                // g2d.drawLine(0, 0, 100, 100);
+                /*
                 //color , grosor , cuadrado y locacion 
                 g2d.setColor(Color.RED);
                 g2d.setStroke(new BasicStroke(2));
@@ -1002,26 +1005,25 @@ public class Ventana extends JFrame {
                 g2d.setStroke(new BasicStroke(4));
                 //arco 200,100,300
                 //100,
-                g2d.drawArc(300, 100, 100, 100, 0, 180);
-                //pasamos cordenadas , el ultimo num es la cantidad de lados 
-                g2d.drawPolygon(new int[] {200,100,300}, new int[] {100,500,500},3);
+                */
+                
                 //cuadrado relleno
                 g2d.setColor(Color.BLUE);
-                g2d.fillRect(500, 200, 100, 100);
+               // g2d.fillRect(500, 200, 100, 100);
                 //ovalo relleno
-                g2d.fillOval(380, 200, 100, 100);
+                //g2d.fillOval(380, 200, 100, 100);
                 //circulo lleno ,300,300,100,100,0,300 pacman
-                g2d.fillArc(300, 300, 100, 100, 90, 90);
+                //g2d.fillArc(300, 300, 100, 100, 90, 90);
                 
                 g2d.fillPolygon(new int[] {400,300,500}, new int[] {200,300,500}, 3);
-                
+                /*
                 try {
                 	BufferedImage image = ImageIO.read(new File("src\\img\\imagenes"));
                 	g2d.drawImage(image,500,9,null);
 
                 }catch (IOException e) {
                 	e.printStackTrace();
-                }
+                }*/
                 
                 //g2d.drawLine(200, 200, 500, 200);
                 
@@ -1030,6 +1032,81 @@ public class Ventana extends JFrame {
         pane.setSize(1200,700);
         pane.setLocation(0, 0);
         this.add(pane);
+		
+	}
+	public void casa() {
+		JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D)g;
+                
+                //chimenea 
+                g2d.setColor(new Color(176, 176, 176));
+                g2d.fillRect(300, 20, 50, 100);
+                // techo
+
+                g2d.setColor(new Color(227, 47, 18));
+                //pasamos cordenadas , el ultimo num es la cantidad de lados 
+                g2d.fillPolygon(new int[] {120, 245, 370},new int[] {80, 20, 80},3);    
+   
+                //casa
+                g2d.setColor(new Color(237, 172, 83));
+                g2d.fillRect(120, 80, 250, 200);
+                //ventana
+                g2d.setColor(new Color(247, 243, 235));
+                g2d.fillRect(150, 120, 80, 80);
+                //puerta
+                g2d.setColor(new Color(227, 47, 18));
+                g2d.fillRect(260, 100, 90, 180);
+                //regas de la ventana 
+                g2d.setColor(Color.BLACK);
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawLine(150, 160, 230, 160);   
+                //horizontal
+                g2d.setColor(Color.BLACK);
+                g2d.setStroke(new BasicStroke(2));
+                g2d.drawLine(190, 120, 190, 200);
+                //rejas
+                g2d.setColor(new Color(181, 104, 18)); 
+                g2d.fillRect(0, 180, 35, 100);
+                g2d.fillPolygon(new int[] {0, 17, 35}, new int[] {180, 160, 180}, 3);
+
+                // REJA 2
+                g2d.fillRect(90, 180, 35, 100);
+                g2d.fillPolygon(new int[] {90, 107, 125}, new int[] {180, 160, 180}, 3);
+
+                // REJA 3
+                g2d.fillRect(180, 180, 35, 100);
+                g2d.fillPolygon(new int[] {180, 197, 215}, new int[] {180, 160, 180}, 3);
+
+                // REJA 4
+                g2d.fillRect(270, 180, 35, 100);
+                g2d.fillPolygon(new int[] {270, 287, 305}, new int[] {180, 160, 180}, 3);
+
+                // REJA 5
+                g2d.fillRect(360, 180, 35, 100);
+                g2d.fillPolygon(new int[] {360, 377, 395}, new int[] {180, 160, 180}, 3);
+
+                // REJA 6
+                g2d.fillRect(450, 180, 35, 100);
+                g2d.fillPolygon(new int[] {450, 467, 485}, new int[] {180, 160, 180}, 3);
+                //pasto
+                g2d.setColor(new Color(53, 135, 56));
+                g2d.fillRect(0, 280, 500, 50);
+                //tierra
+                g2d.setColor(new Color(176, 176, 176));
+                g2d.fillRect(0, 320, 500, 50);
+
+               
+                               
+            }
+        };
+        panel.setSize(500,400);
+        panel.setLocation(0, 0);
+        panel.setBackground(new Color(39, 245, 238));
+        this.add(panel);
+		
 		
 	}
 }
