@@ -68,8 +68,8 @@ public class Ventana extends JFrame {
 	public Ventana() {
 		this.setTitle("JFrame Icon");
 
-		this.setSize(500,400);
-		//this.setSize(1200,600);
+		//this.setSize(500,400);
+		this.setSize(1200,600);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -92,7 +92,9 @@ public class Ventana extends JFrame {
 		 */
 		
 		//this.icono()	;
-		this.casa();
+		this.login();
+		this.registro();
+		
 		this.setVisible(true);
 		
 		//panel izq 
@@ -649,6 +651,24 @@ public class Ventana extends JFrame {
 				acceder.setSize(145,50);
 				acceder.setFont(new Font("Arial",Font.BOLD,20));
 				contenedor.add(acceder);
+				
+				acceder.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						String usarname_val = usarname.getText();
+						if (usarname_val.equals("")) {
+							usarname.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
+						} else {
+							usarname.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+
+						}
+						
+					}
+					
+				});
+				
 			
 				contenedor.repaint();
 				contenedor.revalidate();
@@ -692,25 +712,25 @@ public class Ventana extends JFrame {
 				
 				registro.add(bio_tag);
 				JTextArea bio = new JTextArea();
-				bio.setBounds(100, 250, 400, 80);
+				bio.setBounds(100, 250, 400, 60);
 				registro.add(bio);
 				
 				JCheckBox sweet_option = new JCheckBox("Dulce");
-				sweet_option.setBounds(120, 330, 100, 50);		
+				sweet_option.setBounds(120, 330, 100, 40);		
 				registro.add(sweet_option);
 				
 				JCheckBox salty_option = new JCheckBox("Salado");
-				salty_option.setBounds(220, 330, 100, 50);
+				salty_option.setBounds(220, 330, 100, 40);
 				registro.add(salty_option);
 				
 				JCheckBox healthy = new JCheckBox("Saludable");
-				healthy.setBounds(320, 330, 100, 50);
+				healthy.setBounds(320, 330, 100, 40);
 				healthy.setBorderPainted(true);
 
 				registro.add(healthy);
 				
 				 JLabel termino = new JLabel("TÉRMINOS");
-				 termino.setBounds(200, 378, 200, 30);
+				 termino.setBounds(200, 378, 200, 25);
 				 termino.setOpaque(true);
 				 termino.setHorizontalAlignment(JLabel.CENTER);
 				 registro.add(termino);
@@ -739,7 +759,6 @@ public class Ventana extends JFrame {
 					registro.add(Crear);
 				
 				
-				this.registro();
 
 				registro.repaint();
 		
@@ -1072,23 +1091,23 @@ public class Ventana extends JFrame {
                 g2d.fillRect(0, 180, 35, 100);
                 g2d.fillPolygon(new int[] {0, 17, 35}, new int[] {180, 160, 180}, 3);
 
-                // REJA 2
+                // rj 2
                 g2d.fillRect(90, 180, 35, 100);
                 g2d.fillPolygon(new int[] {90, 107, 125}, new int[] {180, 160, 180}, 3);
 
-                // REJA 3
+                // rj 3
                 g2d.fillRect(180, 180, 35, 100);
                 g2d.fillPolygon(new int[] {180, 197, 215}, new int[] {180, 160, 180}, 3);
 
-                // REJA 4
+                // rj 4
                 g2d.fillRect(270, 180, 35, 100);
                 g2d.fillPolygon(new int[] {270, 287, 305}, new int[] {180, 160, 180}, 3);
 
-                // REJA 5
+                // rj 5
                 g2d.fillRect(360, 180, 35, 100);
                 g2d.fillPolygon(new int[] {360, 377, 395}, new int[] {180, 160, 180}, 3);
 
-                // REJA 6
+                // rj 6
                 g2d.fillRect(450, 180, 35, 100);
                 g2d.fillPolygon(new int[] {450, 467, 485}, new int[] {180, 160, 180}, 3);
                 //pasto
@@ -1097,8 +1116,20 @@ public class Ventana extends JFrame {
                 //tierra
                 g2d.setColor(new Color(176, 176, 176));
                 g2d.fillRect(0, 320, 500, 50);
+                
+                // rejillas
+                g2d.setColor(new Color(199, 137, 34));
+                g2d.fillRect(0, 200, 500, 5);
 
+                g2d.setColor(new Color(199, 137, 34));
+                g2d.fillRect(0, 220, 500, 5);
                
+                g2d.setColor(new Color(199, 137, 34));
+                g2d.fillRect(0, 240, 500, 5);
+                
+                g2d.setColor(new Color(199, 137, 34));
+                g2d.fillRect(0, 260, 500, 5);
+                
                                
             }
         };
