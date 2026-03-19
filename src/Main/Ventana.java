@@ -30,7 +30,9 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -631,7 +633,7 @@ public class Ventana extends JFrame {
 		        contenedor.add(EtContra);
 				
 				
-				JTextField contraseña = new JTextField();
+		        JPasswordField  contraseña = new JPasswordField ();
 				contraseña.setBounds(100, 270, 350, 35);
 				contraseña.setFont(new Font("Arial",Font.BOLD,22));
 				contenedor.add(contraseña);
@@ -658,12 +660,23 @@ public class Ventana extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						String usarname_val = usarname.getText();
-						if (usarname_val.equals("")) {
-							usarname.setBorder(BorderFactory.createLineBorder(Color.red,3,true));
-						} else {
-							usarname.setBorder(BorderFactory.createLineBorder(Color.green,3,true));
+			            String pass_val = new String(contraseña.getPassword());
+			            if (usarname_val.isEmpty()) {
+			                usarname.setBorder(BorderFactory.createLineBorder(Color.RED, 3, true));
+			            } else {
+			                usarname.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3, true));
+			            }
 
-						}
+			            if (pass_val.isEmpty()) {
+			                contraseña.setBorder(BorderFactory.createLineBorder(Color.RED, 3, true));
+			            } else {
+			                contraseña.setBorder(BorderFactory.createLineBorder(Color.GREEN, 3, true));
+			            }
+
+			            if (!usarname_val.isEmpty() && !pass_val.isEmpty()) {
+			            	JOptionPane.showMessageDialog(null, "Bienvenido.");
+			            }
+			        
 						
 					}
 					
