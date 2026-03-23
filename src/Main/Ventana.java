@@ -71,7 +71,7 @@ public class Ventana extends JFrame {
 		this.setTitle("JFrame Icon");
 
 		//this.setSize(500,400);
-		this.setSize(1200,600);
+		this.setSize(400,600);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -92,11 +92,11 @@ public class Ventana extends JFrame {
 
         this.pack();
 		 */
-		
+		this.examen();
 		//this.icono()	;
-		this.login();
-		this.registro();
-		
+		//this.login();
+		//this.registro();
+		//this.router("login");
 		this.setVisible(true);
 		
 		//panel izq 
@@ -601,7 +601,7 @@ public class Ventana extends JFrame {
 				JPanel contenedor = new JPanel();
 				contenedor.setOpaque(true);
 				contenedor.setBackground(Color.GRAY);
-				contenedor.setBounds(0, 0, 600, 600);
+				contenedor.setBounds(0, 0, 1100, 600);
 				contenedor.setLayout(null);
 				
 				contenedor.setLocation(0,0);
@@ -682,7 +682,18 @@ public class Ventana extends JFrame {
 					
 				});
 				
-			
+				JButton registro = new JButton("¿Aún no tienes cuenta?"); 
+				registro.setLocation(100, 460);
+				registro.setSize(200, 50);
+				registro.setFont(new Font("Arial",Font.BOLD,22));
+				contenedor.add(registro);
+
+				registro.addActionListener(e -> {
+
+					this.router("registro");
+				});
+				
+				
 				contenedor.repaint();
 				contenedor.revalidate();
 		
@@ -825,6 +836,23 @@ public class Ventana extends JFrame {
 		users.repaint();
 		users.revalidate();
 	}
+	public void router(String target) {
+		this.getContentPane().removeAll();
+
+		if(target.equals("login"))  
+			this.login();
+
+
+		if(target.equals("registro"))  
+			this.registro();
+
+		this.setVisible(true);
+		this.repaint();
+		this.revalidate();
+		
+	}
+		
+	
 	public void calculadora () {
 		JPanel panel = new JPanel();
 		panel.setOpaque(true);
@@ -1151,6 +1179,46 @@ public class Ventana extends JFrame {
         panel.setBackground(new Color(39, 245, 238));
         this.add(panel);
 		
+		
+	}
+	
+	public void examen() {
+		
+		JPanel contenedor = new JPanel();
+		contenedor.setOpaque(true);
+		contenedor.setBackground(Color.WHITE);
+		contenedor.setBounds(0, 0, 400, 600);
+		contenedor.setLayout(null);
+		
+		contenedor.setLocation(0,0);
+		this.add(contenedor);
+
+		JLabel title_login = new JLabel();
+		title_login.setText("Factura en java Swing ");
+		title_login.setBounds(0, 0, 400, 60);
+		title_login.setOpaque(true);
+		title_login.setBackground(Color.BLUE);
+		title_login.setForeground(Color.WHITE);	
+		title_login.setFont(new Font("Arial",Font.BOLD,15));
+
+		title_login.setHorizontalAlignment(JLabel.LEFT);
+		contenedor.add(title_login);
+		
+		JLabel subtittle = new JLabel();
+		subtittle.setText("Sin Base de Datos");
+		subtittle.setBounds(0, 60, 400, 15);
+		subtittle.setOpaque(true);
+		subtittle.setBackground(Color.BLUE);
+		subtittle.setForeground(Color.WHITE);	
+		subtittle.setFont(new Font("Arial",Font.BOLD,10));
+
+		subtittle.setHorizontalAlignment(JLabel.LEFT);
+		contenedor.add(subtittle);
+			
+		
+		JLabel EtNombre = new JLabel("NOMBRE DE USUARIO:");
+		EtNombre.setBounds(100, 150, 250, 30);
+        contenedor.add(EtNombre);
 		
 	}
 }
