@@ -44,42 +44,16 @@ import javax.swing.border.TitledBorder;
 
 public class Ventana extends JFrame {
 	 
-		private double operandoA = 0;
-	    private String operacion = "";
-	    private boolean esperandoB = false; 
-	    private boolean errored = false;
-	    
-	    private JLabel labelExpresion;
-	    private JLabel labelResultado; 
-	    
-	    private static final Color BG_VENTANA = Color.decode("#1e1e2e");
-	    private static final Color BG_PANTALLA = Color.decode("#181825");
-	    private static final Color BG_BTN_NUM = Color.decode("#313244");
-	    private static final Color BG_BTN_OP = Color.decode("#cba6f7"); 
-	    private static final Color BG_BTN_ESP = Color.decode("#f38ba8");
-	    private static final Color BG_BTN_IGUAL = Color.decode("#a6e3a1");
-	    private static final Color COLOR_TEXT = Color.decode("#cdd6f4");
-	    private static final Color COLOR_TEXT_OP = Color.decode("#1e1e2e");
-
-	    // ── Fuentes ───────────────────────────────────────────────────────
-	    private static final Font FONT_PANTALLA = new Font("Segoe UI", Font.BOLD, 36);
-	    private static final Font FONT_EXPR = new Font("Segoe UI", Font.PLAIN, 16);
-	    private static final Font FONT_BTN = new Font("Segoe UI", Font.BOLD, 20);
-	    private static final Font FONT_BTN_SM = new Font("Segoe UI", Font.BOLD, 16);
+		
 
 	public Ventana() {
 		this.setTitle("JFrame Icon");
-
-		//this.setSize(500,400);
-		this.setSize(400,600);
+		this.setSize(1200,600);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setMaximumSize(new Dimension(1200,800));
         this.setResizable(false);
-
-	//	this.setTitle("Mi Ventana");
-		//this.setBackground(Color.BLUE); 
 		this.setLocation(200,200);
 		this.setLayout(null);
 		/*
@@ -92,27 +66,33 @@ public class Ventana extends JFrame {
 
         this.pack();
 		 */
-		this.examen();
 		//this.icono()	;
-		//this.login();
-		//this.registro();
-		//this.router("login");
-		this.setVisible(true);
-		
-		//panel izq 
-		/*
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JMenuBar barra = new JMenuBar();
+	    JMenu archivo = new JMenu("Archivo");
+	    archivo.add(new JMenuItem("Abrir"));
+	    archivo.add(new JMenuItem("Guardar"));
+	    barra.add(archivo);
+	    JMenu ayuda = new JMenu("Ayuda");
+	    barra.add(ayuda);
+	    JMenu cuenta = new JMenu("Cuenta");
+	    JMenuItem itemAcceder = new JMenuItem("Acceder");
+	    JMenuItem itemRegistrarse = new JMenuItem("Registrarse");
 
-        this.setLocationRelativeTo(null);
+	    // router
+	    itemAcceder.addActionListener(e -> this.router("login"));
+	    itemRegistrarse.addActionListener(e -> this.router("registro"));
 
-        
+	    cuenta.add(itemAcceder);
+	    cuenta.add(itemRegistrarse);
+	    barra.add(cuenta);
 
-        this.setLocationRelativeTo(null); // centrar DESPUÉS de pack()
-        this.setVisible(true);
-		 */
-		
-		
-		
+	    // barra d la ventana
+	    this.setJMenuBar(barra);
+	    this.login();    
+	    this.registro();   
+	    this.router("login"); 
+	    
+	    this.setVisible(true);
 		
 	}
 	public void icono() {
@@ -204,6 +184,7 @@ public class Ventana extends JFrame {
 		
 	
 	}
+	/*
 	private void construirPantalla() {
         JPanel panelPantalla = new JPanel();
         panelPantalla.setLayout(new BorderLayout());
@@ -286,7 +267,7 @@ public class Ventana extends JFrame {
         panelPrincipal.add(panelSur, BorderLayout.SOUTH);
 
         this.add(panelPrincipal, BorderLayout.CENTER);
-    }
+    }*/
 	
 	
 	public void layat() {
@@ -421,7 +402,7 @@ public class Ventana extends JFrame {
     }
 
     
-
+/*
     private String pantalla() {
         return labelResultado.getText();
     }
@@ -595,7 +576,7 @@ public class Ventana extends JFrame {
         String s = String.format("%.10f", val).replaceAll("0+$", "").replaceAll("\\.$", "");
         return s;
     }
-
+*/
 	public void login() {
 		//contenedor del login 
 				JPanel contenedor = new JPanel();
@@ -1182,43 +1163,4 @@ public class Ventana extends JFrame {
 		
 	}
 	
-	public void examen() {
-		
-		JPanel contenedor = new JPanel();
-		contenedor.setOpaque(true);
-		contenedor.setBackground(Color.WHITE);
-		contenedor.setBounds(0, 0, 400, 600);
-		contenedor.setLayout(null);
-		
-		contenedor.setLocation(0,0);
-		this.add(contenedor);
-
-		JLabel title_login = new JLabel();
-		title_login.setText("Factura en java Swing ");
-		title_login.setBounds(0, 0, 400, 60);
-		title_login.setOpaque(true);
-		title_login.setBackground(Color.BLUE);
-		title_login.setForeground(Color.WHITE);	
-		title_login.setFont(new Font("Arial",Font.BOLD,15));
-
-		title_login.setHorizontalAlignment(JLabel.LEFT);
-		contenedor.add(title_login);
-		
-		JLabel subtittle = new JLabel();
-		subtittle.setText("Sin Base de Datos");
-		subtittle.setBounds(0, 60, 400, 15);
-		subtittle.setOpaque(true);
-		subtittle.setBackground(Color.BLUE);
-		subtittle.setForeground(Color.WHITE);	
-		subtittle.setFont(new Font("Arial",Font.BOLD,10));
-
-		subtittle.setHorizontalAlignment(JLabel.LEFT);
-		contenedor.add(subtittle);
-			
-		
-		JLabel EtNombre = new JLabel("NOMBRE DE USUARIO:");
-		EtNombre.setBounds(100, 150, 250, 30);
-        contenedor.add(EtNombre);
-		
-	}
 }
