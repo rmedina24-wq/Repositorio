@@ -48,7 +48,7 @@ public class Ventana extends JFrame {
 
 	public Ventana() {
 		this.setTitle("JFrame Icon");
-		this.setSize(1200,600);
+		this.setSize(500,400);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -67,7 +67,8 @@ public class Ventana extends JFrame {
         this.pack();
 		 */
 		//this.icono()	;
-		JMenuBar barra = new JMenuBar();
+		/*
+		 *JMenuBar barra = new JMenuBar();
 	    JMenu archivo = new JMenu("Archivo");
 	    archivo.add(new JMenuItem("Abrir"));
 	    archivo.add(new JMenuItem("Guardar"));
@@ -91,6 +92,11 @@ public class Ventana extends JFrame {
 	    this.login();    
 	    this.registro();   
 	    this.router("login"); 
+	    this.users();
+		 */
+		
+		this.mario();
+	    this.icono();
 	    
 	    this.setVisible(true);
 		
@@ -1151,9 +1157,11 @@ public class Ventana extends JFrame {
                 
                 g2d.setColor(new Color(199, 137, 34));
                 g2d.fillRect(0, 260, 500, 5);
-                
-                               
             }
+            
+            
+            
+            
         };
         panel.setSize(500,400);
         panel.setLocation(0, 0);
@@ -1162,5 +1170,104 @@ public class Ventana extends JFrame {
 		
 		
 	}
+	public void mario() {
+    	JPanel panel = new JPanel() {
+    	    @Override
+    	    protected void paintComponent(Graphics g) {
+    	        super.paintComponent(g);
+    	        Graphics2D g2d = (Graphics2D) g;
+
+    	        // cielo
+    	        g2d.setColor(new Color(135, 206, 235));
+    	        g2d.fillRect(0, 0, 600, 400);
+
+    	        // suelo (bloques)
+    	        g2d.setColor(new Color(181, 104, 18));
+    	        g2d.fillRect(0, 300, 600, 100);
+
+    	     // lineas verticales (bloques)
+    	        g2d.setColor(Color.BLACK);
+    	        g2d.drawLine(0, 300, 0, 400);
+    	        g2d.drawLine(40, 300, 40, 400);
+    	        g2d.drawLine(80, 300, 80, 400);
+    	        g2d.drawLine(120, 300, 120, 400);
+    	        g2d.drawLine(160, 300, 160, 400);
+    	        g2d.drawLine(200, 300, 200, 400);
+    	        g2d.drawLine(240, 300, 240, 400);
+    	        g2d.drawLine(280, 300, 280, 400);
+    	        g2d.drawLine(320, 300, 320, 400);
+    	        g2d.drawLine(360, 300, 360, 400);
+    	        g2d.drawLine(400, 300, 400, 400);
+    	        g2d.drawLine(440, 300, 440, 400);
+    	        g2d.drawLine(480, 300, 480, 400);
+    	        g2d.drawLine(520, 300, 520, 400);
+    	        g2d.drawLine(560, 300, 560, 400);
+    	        g2d.drawLine(600, 300, 600, 400);
+
+    	        // lineas horizontales
+    	        g2d.drawLine(0, 300, 600, 300);
+    	        g2d.drawLine(0, 340, 600, 340);
+    	        g2d.drawLine(0, 380, 600, 380);
+    	        g2d.drawLine(0, 400, 600, 400);
+
+    	        // arbusto
+    	        g2d.setColor(new Color(34, 139, 34));
+    	        g2d.fillOval(40, 260, 60, 40);
+    	        g2d.fillOval(70, 250, 60, 50);
+
+    	        // bloque café
+    	        g2d.setColor(new Color(210, 180, 140));
+    	        g2d.fillRect(150, 240, 80, 60);
+    	        g2d.setColor(Color.BLACK);
+    	        g2d.drawRect(150, 240, 80, 60);
+
+    	        // tornillos esquinas
+    	        g2d.fillOval(150, 240, 5, 5);
+    	        g2d.fillOval(225, 240, 5, 5);
+    	        g2d.fillOval(150, 295, 5, 5);
+    	        g2d.fillOval(225, 295, 5, 5);
+
+    	        // bloque azul
+    	        g2d.setColor(new Color(100, 160, 220));
+    	        g2d.fillRect(230, 220, 100, 80);
+    	        g2d.setColor(Color.BLACK);
+    	        g2d.drawRect(230, 220, 100, 80);
+
+    	        // sombra negra
+    	        g2d.setColor(Color.BLACK);
+    	        g2d.fillRect(330, 240, 20, 60);
+
+    	        // tubo (tipo mario)
+    	        g2d.setColor(new Color(0, 153, 0));
+    	        g2d.fillRect(360, 250, 60, 50);
+    	        g2d.fillRect(350, 240, 80, 20);
+
+    	        g2d.setColor(Color.BLACK);
+    	        g2d.drawRect(360, 250, 60, 50);
+    	        g2d.drawRect(350, 240, 80, 20);
+
+    	        // bloque verde derecha
+    	        g2d.setColor(new Color(0, 200, 80));
+    	        g2d.fillRect(450, 240, 100, 60);
+    	        g2d.setColor(Color.BLACK);
+    	        g2d.drawRect(450, 240, 100, 60);
+
+    	        // bloques flotantes
+    	        g2d.setColor(new Color(255, 140, 0));
+    	        g2d.fillRect(100, 80, 60, 40);
+    	        g2d.fillRect(300, 50, 60, 40);
+    	        g2d.fillRect(500, 100, 60, 40);
+
+    	        g2d.setColor(Color.BLACK);
+    	        g2d.drawRect(100, 80, 60, 40);
+    	        g2d.drawRect(300, 50, 60, 40);
+    	        g2d.drawRect(500, 100, 60, 40);
+    	    }
+    	};
+    	panel.setSize(500,400);
+        panel.setLocation(0, 0);
+        panel.setBackground(new Color(39, 245, 238));
+        this.add(panel);
+    }
 	
 }
