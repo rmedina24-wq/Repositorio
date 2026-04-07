@@ -43,8 +43,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 public class Ventana extends JFrame {
-	 
-		
+	JPanel contenedorPrincipal;
 
 	public Ventana() {
 		this.setTitle("JFrame Icon");
@@ -55,8 +54,11 @@ public class Ventana extends JFrame {
 		this.setMaximumSize(new Dimension(1200,800));
         this.setResizable(false);
 		this.setLocation(200,200);
-		this.setLayout(null);
-		/*
+		this.setLayout(new BorderLayout());
+
+		contenedorPrincipal = new JPanel();
+		contenedorPrincipal.setLayout(null);
+		this.add(contenedorPrincipal, BorderLayout.CENTER);		/*
 		 * this.test();
         this.setLayout(new BorderLayout(0, 0));
 
@@ -67,36 +69,12 @@ public class Ventana extends JFrame {
         this.pack();
 		 */
 		//this.icono()	;
-		/*
-		 *JMenuBar barra = new JMenuBar();
-	    JMenu archivo = new JMenu("Archivo");
-	    archivo.add(new JMenuItem("Abrir"));
-	    archivo.add(new JMenuItem("Guardar"));
-	    barra.add(archivo);
-	    JMenu ayuda = new JMenu("Ayuda");
-	    barra.add(ayuda);
-	    JMenu cuenta = new JMenu("Cuenta");
-	    JMenuItem itemAcceder = new JMenuItem("Acceder");
-	    JMenuItem itemRegistrarse = new JMenuItem("Registrarse");
-
-	    // router
-	    itemAcceder.addActionListener(e -> this.router("login"));
-	    itemRegistrarse.addActionListener(e -> this.router("registro"));
-
-	    cuenta.add(itemAcceder);
-	    cuenta.add(itemRegistrarse);
-	    barra.add(cuenta);
-
-	    // barra d la ventana
-	    this.setJMenuBar(barra);
-	    this.login();    
-	    this.registro();   
-	    this.router("login"); 
-	    this.users();
-		 */
 		
-		this.mario();
-	    this.icono();
+		
+	    // barra d la ventana*/
+		this.menu();
+		this.router("login");
+		
 	    
 	    this.setVisible(true);
 		
@@ -186,95 +164,8 @@ public class Ventana extends JFrame {
 		south_panel.add(new JButton("5"));
 		
 		test_panel.add(south_panel,BorderLayout.SOUTH);
-	
-		
-	
-	}
-	/*
-	private void construirPantalla() {
-        JPanel panelPantalla = new JPanel();
-        panelPantalla.setLayout(new BorderLayout());
-        panelPantalla.setBackground(BG_PANTALLA);
-        panelPantalla.setPreferredSize(new Dimension(360, 110));
-        panelPantalla.setBorder(BorderFactory.createEmptyBorder(12, 18, 12, 18));
+		}
 
-        // Línea superior: expresión parcial ej: "25 + "
-        labelExpresion = new JLabel(" ");
-        labelExpresion.setFont(FONT_EXPR);
-        labelExpresion.setForeground(Color.decode("#a6adc8"));
-        labelExpresion.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelPantalla.add(labelExpresion, BorderLayout.NORTH);
-
-        // Línea inferior: número actual / resultado
-        labelResultado = new JLabel("0");
-        labelResultado.setFont(FONT_PANTALLA);
-        labelResultado.setForeground(COLOR_TEXT);
-        labelResultado.setHorizontalAlignment(SwingConstants.RIGHT);
-        panelPantalla.add(labelResultado, BorderLayout.CENTER);
-
-        this.add(panelPantalla, BorderLayout.NORTH);
-    }
-	private void construirTeclado() {
-
-        JPanel panelPrincipal = new JPanel(new BorderLayout(4, 4));
-        panelPrincipal.setBackground(BG_VENTANA);
-        panelPrincipal.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
-
-        // ── Fila extra superior (C, CE, %, ÷) ─────────────────────────
-        JPanel filaTop = new JPanel(new GridLayout(1, 4, 6, 6));
-        filaTop.setBackground(BG_VENTANA);
-        filaTop.add(crearBoton("C", BG_BTN_ESP, COLOR_TEXT_OP, FONT_BTN_SM, this::accionClear));
-        filaTop.add(crearBoton("CE", BG_BTN_ESP, COLOR_TEXT_OP, FONT_BTN_SM, this::accionCE));
-        filaTop.add(crearBoton("%", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("%")));
-        filaTop.add(crearBoton("÷", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("÷")));
-        panelPrincipal.add(filaTop, BorderLayout.NORTH);
-
-       
-        JPanel gridCenter = new JPanel(new GridLayout(4, 4, 6, 6));
-        gridCenter.setBackground(BG_VENTANA);
-
-       
-        gridCenter.add(crearBoton("7", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("7")));
-        gridCenter.add(crearBoton("8", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("8")));
-        gridCenter.add(crearBoton("9", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("9")));
-        gridCenter.add(crearBoton("×", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("×")));
-
-        
-        gridCenter.add(crearBoton("4", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("4")));
-        gridCenter.add(crearBoton("5", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("5")));
-        gridCenter.add(crearBoton("6", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("6")));
-        gridCenter.add(crearBoton("−", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("−")));
-
-      
-        gridCenter.add(crearBoton("1", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("1")));
-        gridCenter.add(crearBoton("2", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("2")));
-        gridCenter.add(crearBoton("3", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("3")));
-        gridCenter.add(crearBoton("+", BG_BTN_OP, COLOR_TEXT_OP, FONT_BTN, e -> accionOperacion("+")));
-
-        // Fila +/- 0 . =
-        gridCenter.add(crearBoton("+/−", BG_BTN_NUM, COLOR_TEXT, FONT_BTN_SM, this::accionNegarSigno));
-        gridCenter.add(crearBoton("0", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito("0")));
-        gridCenter.add(crearBoton(".", BG_BTN_NUM, COLOR_TEXT, FONT_BTN, e -> accionDigito(".")));
-        gridCenter.add(crearBoton("=", BG_BTN_IGUAL, COLOR_TEXT_OP, FONT_BTN, this::accionIgual));
-
-        panelPrincipal.add(gridCenter, BorderLayout.CENTER);
-
-        JPanel panelSur = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 6));
-        panelSur.setBackground(BG_VENTANA);
-
-        String[] extras = { "x²", "√", "1/x" };
-        for (String lbl : extras) {
-            JButton b = crearBoton(lbl, Color.decode("#45475a"), COLOR_TEXT, FONT_BTN_SM,
-                    e -> accionFuncion(lbl));
-            b.setPreferredSize(new Dimension(90, 38));
-            panelSur.add(b);
-        }
-
-        panelPrincipal.add(panelSur, BorderLayout.SOUTH);
-
-        this.add(panelPrincipal, BorderLayout.CENTER);
-    }*/
-	
 	
 	public void layat() {
 		
@@ -407,182 +298,6 @@ public class Ventana extends JFrame {
         return btn;
     }
 
-    
-/*
-    private String pantalla() {
-        return labelResultado.getText();
-    }
-
-    private void setPantalla(String val) {
-        labelResultado.setText(val);
-    }
-
-    private void accionDigito(String d) {
-        if (errored) {
-            reset();
-        }
-
-        String actual = pantalla();
-
-        if (esperandoB) {
-            setPantalla(d.equals(".") ? "0." : d);
-            esperandoB = false;
-            return;
-        }
-
-        if (d.equals(".")) {
-            if (actual.contains("."))
-                return; 
-            setPantalla(actual + ".");
-            return;
-        }
-
-        if (actual.equals("0")) {
-            setPantalla(d);
-        } else {
-            if (actual.length() < 15)
-                setPantalla(actual + d); 
-        }
-    }
-
-    private void accionOperacion(String op) {
-        if (errored) {
-            reset();
-            return;
-        }
-
-        if (!operacion.isEmpty() && !esperandoB) {
-            calcular();
-        }
-
-        operandoA = parseD(pantalla());
-        operacion = op;
-        esperandoB = true;
-
-        labelExpresion.setText(formatearNum(operandoA) + " " + op);
-    }
-
-    private void accionIgual(ActionEvent e) {
-        if (operacion.isEmpty() || errored)
-            return;
-        calcular();
-        operacion = "";
-        esperandoB = true;
-    }
-
-    private void calcular() {
-        double b = parseD(pantalla());
-        double resultado = 0;
-
-        labelExpresion.setText(formatearNum(operandoA) + " " + operacion + " " + formatearNum(b) + " =");
-
-        switch (operacion) {
-            case "+" -> resultado = operandoA + b;
-            case "−" -> resultado = operandoA - b;
-            case "×" -> resultado = operandoA * b;
-            case "÷" -> {
-                if (b == 0) {
-                    mostrarError("No se puede dividir entre 0");
-                    return;
-                }
-                resultado = operandoA / b;
-            }
-            case "%" -> resultado = operandoA % b;
-            default -> resultado = b;
-        }
-
-        setPantalla(formatearNum(resultado));
-        operandoA = resultado;
-    }
-
-    private void accionFuncion(String fn) {
-        if (errored) {
-            reset();
-            return;
-        }
-        double val = parseD(pantalla());
-        double res;
-        switch (fn) {
-            case "x²" -> {
-                res = val * val;
-                labelExpresion.setText("sqr(" + formatearNum(val) + ") =");
-            }
-            case "√" -> {
-                if (val < 0) {
-                    mostrarError("√ negativo");
-                    return;
-                }
-                res = Math.sqrt(val);
-                labelExpresion.setText("√(" + formatearNum(val) + ") =");
-            }
-            case "1/x" -> {
-                if (val == 0) {
-                    mostrarError("1/0 indefinido");
-                    return;
-                }
-                res = 1 / val;
-                labelExpresion.setText("1/(" + formatearNum(val) + ") =");
-            }
-            default -> {
-                return;
-            }
-        }
-        setPantalla(formatearNum(res));
-        operandoA = res;
-        operacion = "";
-        esperandoB = true;
-    }
-
-    private void accionNegarSigno(ActionEvent e) {
-        if (errored)
-            return;
-        double val = parseD(pantalla());
-        setPantalla(formatearNum(-val));
-    }
-
-    private void accionCE(ActionEvent e) {
-        errored = false;
-        setPantalla("0");
-        esperandoB = false;
-    }
-
-    private void accionClear(ActionEvent e) {
-        reset();
-    }
-
-    private void reset() {
-        errored = false;
-        operandoA = 0;
-        operacion = "";
-        esperandoB = false;
-        setPantalla("0");
-        labelExpresion.setText(" ");
-    }
-
-    private void mostrarError(String msg) {
-        errored = true;
-        setPantalla("Error");
-        labelExpresion.setText(msg);
-    }
-
-    private double parseD(String s) {
-        try {
-            return Double.parseDouble(s.replace(",", "."));
-        } catch (NumberFormatException ex) {
-            return 0;
-        }
-    }
-
-    private String formatearNum(double val) {
-        if (Double.isNaN(val) || Double.isInfinite(val))
-            return "Error";
-        if (val == Math.floor(val) && !Double.isInfinite(val) && Math.abs(val) < 1e12) {
-            return String.valueOf((long) val);
-        }
-        String s = String.format("%.10f", val).replaceAll("0+$", "").replaceAll("\\.$", "");
-        return s;
-    }
-*/
 	public void login() {
 		//contenedor del login 
 				JPanel contenedor = new JPanel();
@@ -684,6 +399,61 @@ public class Ventana extends JFrame {
 				contenedor.repaint();
 				contenedor.revalidate();
 		
+	}
+	public void menu() {
+
+	    JMenuBar barra = new JMenuBar();
+
+	    // CUENTA
+	    JMenu cuenta = new JMenu("Cuenta");
+
+	    JMenuItem login = new JMenuItem("Login");
+	    JMenuItem registro = new JMenuItem("Registro");
+	    JMenuItem recuperar = new JMenuItem("Recuperación de cuenta");
+
+	    login.addActionListener(e -> router("login"));
+	    registro.addActionListener(e -> router("registro"));
+	    recuperar.addActionListener(e -> router("recuperar"));
+
+	    cuenta.add(login);
+	    cuenta.add(registro);
+	    cuenta.add(recuperar);
+
+	    // USUARIOS
+	    JMenu usuarios = new JMenu("Usuarios");
+
+	    JMenuItem alta = new JMenuItem("Alta");
+	    JMenuItem baja = new JMenuItem("Baja");
+	    JMenuItem consultar = new JMenuItem("Consultar");
+
+	    alta.addActionListener(e -> router("alta"));
+	    baja.addActionListener(e -> router("baja"));
+	    consultar.addActionListener(e -> router("consultar"));
+
+	    usuarios.add(alta);
+	    usuarios.add(baja);
+	    usuarios.add(consultar);
+
+	    // AYUDA
+	    JMenu ayuda = new JMenu("Ayuda");
+
+	    JMenuItem a1 = new JMenuItem("¿Cómo crear un usuario?");
+	    JMenuItem a2 = new JMenuItem("¿Cómo acceder al sistema?");
+	    JMenuItem a3 = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
+
+	    a1.addActionListener(e -> router("ayuda1"));
+	    a2.addActionListener(e -> router("ayuda2"));
+	    a3.addActionListener(e -> router("ayuda3"));
+
+	    ayuda.add(a1);
+	    ayuda.add(a2);
+	    ayuda.add(a3);
+
+	    barra.add(cuenta);
+	    barra.add(usuarios);
+	    barra.add(ayuda);
+
+	    this.setJMenuBar(barra);
 	}
 	
 	public void registro() {
@@ -824,19 +594,62 @@ public class Ventana extends JFrame {
 		users.revalidate();
 	}
 	public void router(String target) {
-		this.getContentPane().removeAll();
+	    contenedorPrincipal.removeAll();
 
-		if(target.equals("login"))  
-			this.login();
+	    switch(target) {
+	        case "login":
+	            this.login();
+	            break;
 
+	        case "registro":
+	            this.registro();
+	            break;
 
-		if(target.equals("registro"))  
-			this.registro();
+	        case "alta":
+	            this.users();
+	            break;
 
-		this.setVisible(true);
-		this.repaint();
-		this.revalidate();
-		
+	        case "baja":
+	            this.users();
+	            break;
+
+	        case "consultar":
+	            this.users();
+	            break;
+
+	        case "recuperar":
+	            panelSimple("RECUPERACIÓN DE CUENTA");
+	            break;
+
+	        case "ayuda1":
+	            panelSimple("¿Cómo crear un usuario?");
+	            break;
+
+	        case "ayuda2":
+	            panelSimple("¿Cómo acceder al sistema?");
+	            break;
+
+	        case "ayuda3":
+	            panelSimple("¿Qué pasa si olvidé mi contraseña?");
+	            break;
+	    }
+
+	    contenedorPrincipal.repaint();
+	    contenedorPrincipal.revalidate();
+	}
+	public void panelSimple(String texto) {
+	    JPanel panel = new JPanel();
+	    panel.setBounds(0, 0, 500, 400);
+	    panel.setBackground(Color.WHITE);
+	    panel.setLayout(null);
+
+	    JLabel label = new JLabel(texto);
+	    label.setBounds(100, 150, 300, 50);
+	    label.setFont(new Font("Arial", Font.BOLD, 18));
+
+	    panel.add(label);
+
+	    contenedorPrincipal.add(panel);
 	}
 		
 	
