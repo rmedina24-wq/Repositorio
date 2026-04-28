@@ -2,6 +2,8 @@ package Main;
 
 import javax.swing.SwingUtilities;
 
+import controllers.AuthController;
+
 
 public class Main {
 
@@ -12,6 +14,9 @@ public class Main {
 		Ventana miventana = new Ventana();
         //SwingUtilities.invokeLater(() -> new Ventana());
 		//no funciono
+		AuthController auth = new AuthController();
+		auth.showLogin();
+		
 
 	}
 

@@ -9,22 +9,37 @@ public class Ventana3 extends JFrame {
     private JButton[] casillas = new JButton[9];
     private boolean turnoX = true;
     private int movimientos = 0;
+
+    private int victoriasX = 0;
+    private int victoriasO = 0;
+
     private JLabel lblTurno;
+    private JLabel lblMarcador;
 
     public Ventana3() {
         setTitle("Juego del Gato");
-        setSize(400, 450);
+        setSize(400, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Panel superior (turno)
+        // PANEL SUPERIOR (Turno + marcador)
+        JPanel panelSuperior = new JPanel(new GridLayout(2,1));
+
         lblTurno = new JLabel("Turno: X");
         lblTurno.setHorizontalAlignment(SwingConstants.CENTER);
         lblTurno.setFont(new Font("Arial", Font.BOLD, 18));
-        add(lblTurno, BorderLayout.NORTH);
 
-        // Tablero
+        lblMarcador = new JLabel("X: 0  |  O: 0");
+        lblMarcador.setHorizontalAlignment(SwingConstants.CENTER);
+        lblMarcador.setFont(new Font("Arial", Font.BOLD, 16));
+
+        panelSuperior.add(lblTurno);
+        panelSuperior.add(lblMarcador);
+
+        add(panelSuperior, BorderLayout.NORTH);
+
+        // TABLERO
         JPanel tablero = new JPanel();
         tablero.setLayout(new GridLayout(3, 3, 5, 5));
         tablero.setBackground(Color.YELLOW);
@@ -38,14 +53,25 @@ public class Ventana3 extends JFrame {
 
             casillas[i].addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+
                     if (!casillas[index].getText().equals("")) return;
 
                     casillas[index].setText(turnoX ? "X" : "O");
                     movimientos++;
 
                     if (verificarGanador()) {
+
+                        if (turnoX) {
+                            victoriasX++;
+                        } else {
+                            victoriasO++;
+                        }
+
+                        lblMarcador.setText("X: " + victoriasX + "  |  O: " + victoriasO);
+
                         JOptionPane.showMessageDialog(null,
                                 "Ganó: " + (turnoX ? "X" : "O"));
+
                         reiniciar();
                         return;
                     }
@@ -60,26 +86,22 @@ public class Ventana3 extends JFrame {
                     lblTurno.setText("Turno: " + (turnoX ? "X" : "O"));
                 }
             });
-
             tablero.add(casillas[i]);
         }
-
         add(tablero, BorderLayout.CENTER);
 
-        // Botón reiniciar
+        // BOTÓN REINICIAR
         JButton btnReiniciar = new JButton("Reiniciar");
         btnReiniciar.addActionListener(e -> reiniciar());
         add(btnReiniciar, BorderLayout.SOUTH);
     }
-
-    // Verificar ganador
+    // VERIFICAR GANADOR
     private boolean verificarGanador() {
         int[][] combinaciones = {
                 {0,1,2}, {3,4,5}, {6,7,8},
                 {0,3,6}, {1,4,7}, {2,5,8},
                 {0,4,8}, {2,4,6}
         };
-
         for (int[] c : combinaciones) {
             if (!casillas[c[0]].getText().equals("") &&
                 casillas[c[0]].getText().equals(casillas[c[1]].getText()) &&
@@ -89,8 +111,7 @@ public class Ventana3 extends JFrame {
         }
         return false;
     }
-
-    // Reiniciar juego
+    // REINICIAR TABLERO
     private void reiniciar() {
         for (JButton b : casillas) {
             b.setText("");
@@ -99,7 +120,6 @@ public class Ventana3 extends JFrame {
         movimientos = 0;
         lblTurno.setText("Turno: X");
     }
-
     public static void main(String[] args) {
         new Ventana3().setVisible(true);
     }

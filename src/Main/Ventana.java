@@ -46,18 +46,7 @@ public class Ventana extends JFrame {
 	JPanel contenedorPrincipal;
 
 	public Ventana() {
-		this.setSize(1200, 600);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//this.setLocationRelativeTo(null);
-		this.setMinimumSize(new Dimension(200,200));
-		this.setMaximumSize(new Dimension(800,800));
-		this.setTitle("ventana");
-		// Cargar el ícono desde un archivo en tu proyecto
-        ImageIcon icono = new ImageIcon("src/tax.png");
-        setIconImage(icono.getImage());
-		this.setBackground(Color.BLACK);
-		this.setLocation(100,100);
-		this.setLayout(null);
+		
 
 
 
@@ -292,95 +281,7 @@ public class Ventana extends JFrame {
 
 	public void login() {
 		//panel
-		JPanel contenedor = new JPanel();
-		contenedor.setOpaque(true);
-		contenedor.setBackground(Color.gray);
-		contenedor.setSize(1160,610);
-		contenedor.setLocation(50, 50);
-		contenedor.setLayout(null);
-
-		this.add(contenedor);
-
-		//Label
-		JLabel title_login =new JLabel();
-		title_login.setText("Bienvenido");
-		title_login.setSize(200, 30);
-		title_login.setOpaque(true);
-		title_login.setLocation(150, 10);
-		title_login.setBackground(Color.white);
-		title_login.setFont(new Font("Arial",Font.BOLD,22));
-		title_login.setHorizontalAlignment(JLabel.CENTER);
-		contenedor.add(title_login);
-
-		JLabel user_tag=new JLabel("Correo Electronico");
-		user_tag.setBounds(40, 120, 300, 30);
-		user_tag.setFont(new Font("Arial",Font.BOLD,17));
-		contenedor.add(user_tag);
-
-		//Texto
-		JTextField username= new JTextField();
-		username.setSize(300, 30);
-		username.setLocation(30,150);
-		username.setFont(new Font("Arial",Font.BOLD,22));
-		contenedor.add(username);
-
-		JLabel user_pass=new JLabel("Contraseña");
-		user_pass.setBounds(40, 180, 300, 30);
-		user_pass.setFont(new Font("Arial",Font.BOLD,17));
-		contenedor.add(user_pass);
-
-		JTextField userpass= new JTextField();
-		userpass.setSize(300, 30);
-		userpass.setLocation(30,210);
-		userpass.setFont(new Font("Arial",Font.BOLD,22));
-		contenedor.add(userpass);
-
-		//Boton
-		JButton acceder = new JButton();
-		acceder.setText("Acceder");
-		acceder.setLocation(200, 400);
-		acceder.setSize(180, 50);
-		acceder.setFont(new Font("Arial",Font.BOLD,22));
-		contenedor.add(acceder);
-
-		acceder.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String username_val=username.getText();
-				String userpass_val=userpass.getText();
-				if(username_val.equals("")) {
-					username.setBorder(BorderFactory.createLineBorder(Color.red, 3, true));
-				}
-				else
-					username.setBorder(BorderFactory.createLineBorder(Color.green, 3, true));
-
-				if(userpass_val.equals("")) {
-					userpass.setBorder(BorderFactory.createLineBorder(Color.red, 3, true));
-				}
-				else
-					userpass.setBorder(BorderFactory.createLineBorder(Color.green, 3, true));
-
-			}
-		});
-
-		//Boton
-		JButton registro = new JButton("¿Aun no tienes cuenta?");
-		registro.setLocation(200, 460);
-		registro.setSize(200, 50);
-		registro.setFont(new Font("Arial",Font.BOLD,22));
-		contenedor.add(registro);
-
-		registro.addActionListener(e ->{
-			System.out.println("Hola");
-			System.out.println(e);
-			this.router("registro");
-		});
-
-		//si no funciona el texto
-		contenedor.repaint();
-		contenedor.revalidate();
+		
 	}
 
 	public void recovery_password()
