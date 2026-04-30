@@ -1,20 +1,24 @@
 package controllers;
 
+import Views.RegisterView;
 import view.AuthView;
 
+
 public class AuthController {
-	private AuthView vista;
-	
-	public AuthController() {
-		vista = new AuthView();
-		
-	}
-	public void showLogin()
-	{
-		vista.loginView();
-	}
-	public void showRegister() {
-	    vista.registerView();
-	}
-	
+    
+    private AuthView vista;
+    private RegisterView registro;
+    
+    public AuthController() {
+        vista = new AuthView(this);
+        registro = new RegisterView(this);
+    }
+    
+    public void login() {
+        vista.loginview();
+    }
+    
+    public void register() {
+        registro.registerView();
+    }
 }
